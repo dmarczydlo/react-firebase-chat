@@ -1,18 +1,20 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import AppBar from 'material-ui/AppBar';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Messanger from './components/Messanger';
+import Quenque from './components/Quenque';
+import {Card} from 'material-ui/Card';
 
 import * as firebase from 'firebase';
-
 
 const initialData = {
     'abc': {
         'author': 'chat',
         'message': 'witaj na czacie',
+        'timestamp': '1507839529789'
     }
 };
-
 
 class App extends Component {
 
@@ -26,7 +28,8 @@ class App extends Component {
 
     componentDidMount() {
         const rootRef = firebase.database().ref().child('chat');
-        const messagesRef = rootRef.child('messages');
+        const messagesRef = rootRef.child('messages').orderByChild('timestamp').limitToLast(5);
+
 
         messagesRef.on('value', snap => {
             this.setState({
@@ -35,21 +38,25 @@ class App extends Component {
         });
     }
 
+
     render() {
-        const messages = this.state.messages;
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <div className="App-intro">
-                    Messages :
-                    {Object.keys(messages).map((key, index) => (
-                        <div>{messages[key].author}: {messages[key].message}</div>
-                    ))}
+            <MuiThemeProvider>
+                <div className="App">
+                    <AppBar
+                        title="Simple Firebus Chat"
+                        iconClassNameRight="muidocs-icon-navigation-expand-more"
+                    />
+                    <Card>
+
+
+                        <Messanger />
+                        <Quenque messages={this.state.messages}/>
+
+                    </Card>
+
                 </div>
-            </div>
+            </MuiThemeProvider>
         );
     }
 }

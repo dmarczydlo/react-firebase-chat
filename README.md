@@ -3,15 +3,13 @@
 
 Sample for react chat using firebase
 
-
 # Install and Running
 
 `git clone git@github.com:dmarczydlo/react-firebase-chat.git`
 
 npm install
 
-
-## Create config file
+# Create config file
 Create config.json into /src folder like: 
 
 ```json
@@ -39,7 +37,7 @@ Change database rules like below
 
 ```
 
-
 # Start app
+
 npm start
 navigate to http://localhost:3000 in your browser of choice.

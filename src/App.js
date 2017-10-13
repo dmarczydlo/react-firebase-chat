@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import './App.css';
+import './assets/bootstrap.min.css';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Messanger from './components/Messanger';
 import Quenque from './components/Quenque';
 import {Card} from 'material-ui/Card';
+import * as style from "./assets/style.scss"
 
 import * as firebase from 'firebase';
 
@@ -24,6 +25,8 @@ class App extends Component {
         this.state = {
             messages: initialData
         };
+
+        console.log(style.mainContent);
     }
 
     componentDidMount() {
@@ -42,18 +45,18 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider>
-                <div className="App">
+                <div>
                     <AppBar
                         title="Simple Firebus Chat"
                         iconClassNameRight="muidocs-icon-navigation-expand-more"
                     />
-                    <Card>
+                    <div className={`${style.mainContent} col-md-offset-1 col-md-10 col-xs-12`}>
+                        <Card>
+                            <Messanger/>
+                            <Quenque messages={this.state.messages}/>
 
-
-                        <Messanger />
-                        <Quenque messages={this.state.messages}/>
-
-                    </Card>
+                        </Card>
+                    </div>
 
                 </div>
             </MuiThemeProvider>

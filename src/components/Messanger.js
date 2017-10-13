@@ -86,7 +86,8 @@ class Messanger extends Component {
 
     render() {
         return (
-            <div>
+
+            <div className="col-md-5 col-xs-12">
                 <TextField
                     disabled={false}
                     hintText="Login"

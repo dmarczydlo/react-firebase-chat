@@ -25,7 +25,7 @@ Create config.json into /src folder like:
 }
 ```
 
-##Firebase rules configuration
+#Firebase rules configuration
 
 Change database rules like below 
 
@@ -40,6 +40,6 @@ Change database rules like below
 ```
 
 
-##Start app
+#Start app
 npm start
 navigate to http://localhost:3000 in your browser of choice.

@@ -5,7 +5,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Messanger from './components/Messanger';
 import Quenque from './components/Quenque';
 import {Card} from 'material-ui/Card';
-import * as style from "./assets/style.scss"
+import "./assets/style.css"
+import reverseObject from './utils/reverse_object';
 
 import * as firebase from 'firebase';
 
@@ -25,18 +26,22 @@ class App extends Component {
         this.state = {
             messages: initialData
         };
-
-        console.log(style.mainContent);
     }
 
     componentDidMount() {
         const rootRef = firebase.database().ref().child('chat');
-        const messagesRef = rootRef.child('messages').orderByChild('timestamp').limitToLast(5);
-
+        const messagesRef = rootRef.child('messages').orderByChild('timestamp').limitToLast(10);
 
         messagesRef.on('value', snap => {
+            let retObj = {};
+            snap.forEach(function (child) {
+                const bodyObj = {};
+                bodyObj[child.key] = child.val();
+                retObj = {...retObj, ...bodyObj}
+            });
+
             this.setState({
-                messages: snap.val() || initialData
+                messages: reverseObject(retObj) || initialData
             });
         });
     }
@@ -50,7 +55,7 @@ class App extends Component {
                         title="Simple Firebus Chat"
                         iconClassNameRight="muidocs-icon-navigation-expand-more"
                     />
-                    <div className={`${style.mainContent} col-md-offset-1 col-md-10 col-xs-12`}>
+                    <div className={`mainContent col-md-offset-1 col-md-10 col-xs-12`}>
                         <Card>
                             <Messanger/>
                             <Quenque messages={this.state.messages}/>

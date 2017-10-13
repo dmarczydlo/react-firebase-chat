@@ -57,7 +57,7 @@ class Messanger extends Component {
         const rootRef = firebase.database().ref().child('chat');
         const messagesRef = rootRef.child('messages');
 
-        const today = new Date();
+        // const today = new Date();
         // const date = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
         this.setState({

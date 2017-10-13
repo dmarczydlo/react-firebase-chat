@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
-import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import Avatar from 'material-ui/Avatar';
-import FileFolder from 'material-ui/svg-icons/file/folder';
+import {List} from 'material-ui/List';
+import Message from './Message';
 
 class Quenque extends Component {
 
@@ -13,14 +11,13 @@ class Quenque extends Component {
         return (
             <div className="col-md-5 col-xs-12 ">
                 <List>
-                    <Subheader inset={true}>Messages</Subheader>
+                    <h2>Messages List: </h2>
 
                     {Object.keys(messages).map((key, index) => (
-                        <ListItem
-                            key={index}
-                            leftAvatar={<Avatar icon={<FileFolder/>}/>}
-                            primaryText={`${messages[key].author}: ${messages[key].message}`}
-                            secondaryText={messages[key].timestamp}
+                        <Message
+                            message={messages[key].message}
+                            author={messages[key].author}
+                            timestamp={messages[key].timestamp}
                         />
                     ))}
                 </List>

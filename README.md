@@ -1,7 +1,7 @@
 
 # React Fribase chat (sample)
 
-Sample for react chat using firebase
+Sample for react chat using firebase with emoji :)
 
 # Install and Running
 
